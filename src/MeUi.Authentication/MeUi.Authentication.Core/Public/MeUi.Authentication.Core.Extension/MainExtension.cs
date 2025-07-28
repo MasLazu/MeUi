@@ -6,8 +6,8 @@ using MeUi.Authentication.Core.Application.Interfaces;
 using MeUi.Authentication.Core.Infrastructure.Services;
 using MeUi.Authentication.Core.Shared.Application.Interfaces;
 using MeUi.Authentication.Core.Shared.Infrastructure.Services;
-using System.Reflection;
 using MeUi.Authentication.Core.Infrastructure.Data.Repositories;
+using System.Data.Common;
 
 namespace MeUi.Authentication.Core.Extension;
 
@@ -18,14 +18,11 @@ public static class MainExtension
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
 
-        IConfigurationSection postgresSection = config.GetSection("Postgresql");
-
-        string connectionString = $"Host={postgresSection["Host"]};" +
-            $"Port={postgresSection["Port"]};" + $"Username={postgresSection["Username"]};" +
-            $"Password={postgresSection["Password"]};" + $"Database={postgresSection["Database"]};";
-
-        services.AddDbContext<AuthenticationCoreDbContext>(options =>
-            options.UseNpgsql(connectionString));
+        services.AddDbContext<AuthenticationCoreDbContext>((sp, opts) =>
+        {
+            var conn = sp.GetRequiredService<DbConnection>();
+            opts.UseNpgsql(conn);
+        });
 
         services.AddScoped(typeof(IAuthenticationCoreRepository<>), typeof(AuthenticationCoreRepository<>));
         services.AddScoped<ILoginMethodSeeder, LoginMethodSeeder>();

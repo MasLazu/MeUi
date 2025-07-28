@@ -6,12 +6,15 @@ using MeUi.Entry.Extensions;
 using Serilog;
 using MeUi.Authentication.Core.Extension;
 using MeUi.Authentication.Password.Extenstion;
+using System.Data.Common;
+using Npgsql;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 
+builder.Services.AddDbConnection(builder.Configuration);
 builder.Services.AddAuthenticationCore(builder.Configuration);
 builder.Services.AddAuthenticationPassword(builder.Configuration);
 

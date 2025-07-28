@@ -42,6 +42,7 @@ public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, EmptyR
 
             var createUserCommand = new CreateUserCommand()
             {
+                Transaction = Transaction,
                 Username = command.Username,
                 Email = command.Email,
                 Name = command.Name,

@@ -1,10 +1,7 @@
 using System.Data.Common;
-using System.Transactions;
 using FastEndpoints;
 using MeUi.Shared.Application.interfaces;
 using MeUi.Shared.ApplicationContract.Commands;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace MeUi.Shared.Application.CommandHandler;
 
@@ -13,7 +10,6 @@ public abstract class BaseCommandHandler<TCommand, TResult> : ICommandHandler<TC
     public DbTransaction? Transaction;
 
     public abstract Task<TResult> ExecuteAsync(TCommand command, CancellationToken ct);
-
 
     public async Task<TResult> WithTransactionAsync(
         Func<CancellationToken, Task<TResult>> action,
