@@ -38,6 +38,9 @@ public class GetUserWithLoginMethodsByIdentifierQueryHandler : ICommandHandler<G
             UpdatedAt = user.UpdatedAt,
             LoginMethods = user.LoginMethods.Select(lm => new UserLoginMethodDto()
             {
+                Id = lm.Id,
+                UpdatedAt = lm.UpdatedAt,
+                CreatedAt = lm.CreatedAt,
                 UserId = lm.UserId,
                 LoginMethodCode = lm.LoginMethodCode,
             }).ToList()

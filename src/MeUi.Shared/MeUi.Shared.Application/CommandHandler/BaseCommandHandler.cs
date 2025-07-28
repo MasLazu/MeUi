@@ -19,19 +19,27 @@ public abstract class BaseCommandHandler<TCommand, TResult> : ICommandHandler<TC
     {
         ct.ThrowIfCancellationRequested();
 
-        IRepository mainRepository = repositories.First();
+        IRepository? mainRepository = null;
         bool ownsTransaction = false;
         Transaction = command.Transaction;
 
         if (Transaction == null)
         {
-            Transaction = await mainRepository.BeginTransactionAsync(ct);
-            ownsTransaction = true;
+            foreach (IRepository repository in repositories)
+            {
+                if (repository.GetTransaction() == null)
+                {
+                    Transaction = await repository.BeginTransactionAsync(ct);
+                    mainRepository = repository;
+                    ownsTransaction = true;
+                    break;
+                }
+            }
         }
 
         foreach (IRepository repository in repositories)
         {
-            if (repository.GetTransaction() == null)
+            if (repository.GetTransaction() == null && Transaction != null)
             {
                 await repository.UseTransactionAsync(Transaction, ct);
             }
@@ -40,7 +48,7 @@ public abstract class BaseCommandHandler<TCommand, TResult> : ICommandHandler<TC
         try
         {
             TResult result = await action(ct);
-            if (ownsTransaction)
+            if (ownsTransaction && mainRepository != null)
             {
                 await mainRepository.CommitTransactionAsync(ct);
             }
@@ -48,7 +56,7 @@ public abstract class BaseCommandHandler<TCommand, TResult> : ICommandHandler<TC
         }
         catch
         {
-            if (ownsTransaction)
+            if (ownsTransaction && mainRepository != null)
             {
                 await mainRepository.RollbbackTransactionAsync(ct);
             }

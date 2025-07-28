@@ -2,12 +2,12 @@ using MeUi.Shared.ApplicationContract.Commands;
 
 namespace MeUi.Authentication.Core.ApplicationContract.Commands;
 
-public class TokenRefreshCommand : BaseCommand<TokenRefresh>
+public class TokenRefreshCommand : BaseCommand<TokenRefreshResult>
 {
     public string RefreshToken { get; set; } = string.Empty;
 }
 
-public class TokenRefresh
+public class TokenRefreshResult
 {
     public string AccessToken { get; set; } = string.Empty;
     public string RefreshToken { get; set; } = string.Empty;
