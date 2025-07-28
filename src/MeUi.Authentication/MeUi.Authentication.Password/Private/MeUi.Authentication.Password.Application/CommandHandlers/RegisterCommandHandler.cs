@@ -9,15 +9,16 @@ using MeUi.Authentication.Password.Application.Exceptions;
 using MeUi.Authentication.Core.ApplicationContract.Commands;
 using MeUi.Authentication.Password.Application.Constants;
 using MeUi.Authentication.Core.Shared.Application.Interfaces;
+using MeUi.Authentication.Core.Application.Interfaces;
 
 namespace MeUi.Authentication.Password.Application.CommandHandlers;
 
 public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, EmptyResult>
 {
-    private readonly IRepository<Domain.Entities.Password> _passwordRepository;
+    private readonly IAuthenticationPasswordRepository<Domain.Entities.Password> _passwordRepository;
     private readonly IPasswordHasher _passwordHasher;
 
-    public RegisterCommandHandler(IRepository<Domain.Entities.Password> passwordRepository, IPasswordHasher passwordHasher)
+    public RegisterCommandHandler(IAuthenticationPasswordRepository<Domain.Entities.Password> passwordRepository, IPasswordHasher passwordHasher)
     {
         _passwordRepository = passwordRepository;
         _passwordHasher = passwordHasher;
@@ -30,13 +31,13 @@ public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, EmptyR
             UserDto? user = await new GetUserByEmailQuery() { Email = command.Email }.ExecuteAsync(ct);
             if (user != null)
             {
-                throw new UserAlreadyExistException(nameof(user.Name));
+                throw new UserAlreadyExistException(nameof(user.Email));
             }
 
             user = await new GetUserByUsernameQuery() { Username = command.Username }.ExecuteAsync(ct);
             if (user != null)
             {
-                throw new UserAlreadyExistException(nameof(user.Name));
+                throw new UserAlreadyExistException(nameof(user.Username));
             }
 
             var createUserCommand = new CreateUserCommand()

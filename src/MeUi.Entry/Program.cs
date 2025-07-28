@@ -1,11 +1,8 @@
 
 using System.Text.Json;
-using Ardalis.Specification;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using MeUi.Entry.Extensions;
-using MeUi.Shared.Application.interfaces;
-using MeUi.Shared.Infrastructure.Data.Repositories;
 using Serilog;
 using MeUi.Authentication.Core.Extension;
 using MeUi.Authentication.Password.Extenstion;
@@ -18,20 +15,13 @@ builder.Host.UseSerilog((context, configuration) =>
 builder.Services.AddAuthenticationCore(builder.Configuration);
 builder.Services.AddAuthenticationPassword(builder.Configuration);
 
-// builder.Services.AddOpenApi();
 builder.Services.AddFastEndpointsSwagger(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 
-// Repository registrations are now handled in specific extensions
-
-
 WebApplication app = builder.Build();
 
-// if (app.Environment.IsDevelopment())
-// {
-//     app.MapOpenApi();
-// }
-
+app.UseCustomSerilogRequestLogging();
+app.UseExceptionHandlerMiddleware();
 app.UseFastEndpoints(c => c.Serializer.Options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase).UseSwaggerGen();
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();

@@ -6,5 +6,5 @@ namespace MeUi.Authentication.Core.ApplicationContract.Queries;
 
 public class GetUserByUsernameQuery : ICommand<UserDto?>
 {
-    public string Username { get; set; }
+    public string Username { get; set; } = string.Empty;
 }

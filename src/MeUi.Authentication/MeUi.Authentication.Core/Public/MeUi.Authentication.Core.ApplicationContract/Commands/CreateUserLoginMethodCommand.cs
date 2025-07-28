@@ -5,5 +5,5 @@ namespace MeUi.Authentication.Core.ApplicationContract.Commands;
 public class CreateUserLoginMethodCommand : BaseCommand<Guid>
 {
     public Guid UserId { get; set; }
-    public string LoginMethodCode { get; set; }
+    public string LoginMethodCode { get; set; } = string.Empty;
 }

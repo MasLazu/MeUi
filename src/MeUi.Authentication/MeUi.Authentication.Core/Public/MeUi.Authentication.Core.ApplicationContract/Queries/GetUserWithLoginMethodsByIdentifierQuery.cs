@@ -6,5 +6,5 @@ namespace MeUi.Authentication.Core.ApplicationContract.Queries;
 
 public class GetUserWithLoginMethodsByIdentifierQuery : ICommand<UserDto?>
 {
-    public string Identifier { get; set; }
+    public string Identifier { get; set; } = string.Empty;
 }

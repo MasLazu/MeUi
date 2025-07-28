@@ -9,15 +9,16 @@ using MeUi.Authentication.Password.Application.Constants;
 using MeUi.Authentication.Password.Application.Spesifications;
 using MeUi.Authentication.Core.Shared.Application.Interfaces;
 using MeUi.Authentication.Core.ApplicationContract.Commands;
+using MeUi.Authentication.Core.Application.Interfaces;
 
 namespace MeUi.Authentication.Password.Application.CommandHandlers;
 
 public class LoginCommandHandler : BaseCommandHandler<LoginCommand, LoginResult>
 {
-    private readonly IRepository<Domain.Entities.Password> _passwordRepository;
+    private readonly IAuthenticationPasswordRepository<Domain.Entities.Password> _passwordRepository;
     private readonly IPasswordHasher _passwordHasher;
 
-    public LoginCommandHandler(IRepository<Domain.Entities.Password> passwordRepository, IPasswordHasher passwordHasher)
+    public LoginCommandHandler(IAuthenticationPasswordRepository<Domain.Entities.Password> passwordRepository, IPasswordHasher passwordHasher)
     {
         _passwordRepository = passwordRepository;
         _passwordHasher = passwordHasher;

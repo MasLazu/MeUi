@@ -1,5 +1,6 @@
 using Ardalis.Specification;
 using FastEndpoints;
+using MeUi.Authentication.Core.Application.Interfaces;
 using MeUi.Authentication.Core.ApplicationContract.Dtos;
 using MeUi.Authentication.Core.ApplicationContract.Queries;
 using MeUi.Authentication.Core.Domain.Entities;
@@ -8,9 +9,9 @@ namespace MeUi.Authentication.Core.Application.QueryHandlers;
 
 public class GetLoginMethodsQueryHandler : ICommandHandler<GetLoginMethodsQuery, IEnumerable<LoginMethodDto>>
 {
-    private readonly IReadRepositoryBase<LoginMethod> _loginMethodRepository;
+    private readonly IAuthenticationCoreRepository<LoginMethod> _loginMethodRepository;
 
-    public GetLoginMethodsQueryHandler(IReadRepositoryBase<LoginMethod> loginMethodRepository)
+    public GetLoginMethodsQueryHandler(IAuthenticationCoreRepository<LoginMethod> loginMethodRepository)
     {
         _loginMethodRepository = loginMethodRepository;
     }
