@@ -8,6 +8,10 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
 {
     public void Configure(EntityTypeBuilder<RefreshToken> builder)
     {
+        builder.HasKey(lm => lm.Id);
+
+        builder.HasIndex(lm => lm.DeletedAt);
+
         builder.Property(rt => rt.Token)
             .IsRequired()
             .HasMaxLength(256);

@@ -8,6 +8,10 @@ public class PasswordConfiguration : IEntityTypeConfiguration<Domain.Entities.Pa
 {
     public void Configure(EntityTypeBuilder<Domain.Entities.Password> builder)
     {
+        builder.HasKey(lm => lm.Id);
+
+        builder.HasIndex(lm => lm.DeletedAt);
+
         builder.HasIndex(p => p.UserLoginMethodId)
             .IsUnique()
             .HasFilter("\"DeletedAt\" IS NULL");

@@ -8,6 +8,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
+        builder.HasKey(lm => lm.Id);
+
+        builder.HasIndex(lm => lm.DeletedAt);
+
         builder.HasIndex(u => u.Username)
             .IsUnique()
             .HasFilter("\"DeletedAt\" IS NULL");
@@ -15,6 +19,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasIndex(u => u.Email)
             .IsUnique()
             .HasFilter("\"DeletedAt\" IS NULL");
+
+        builder.HasIndex(u => u.DeletedAt);
 
         builder.Property(u => u.Name)
             .IsRequired()

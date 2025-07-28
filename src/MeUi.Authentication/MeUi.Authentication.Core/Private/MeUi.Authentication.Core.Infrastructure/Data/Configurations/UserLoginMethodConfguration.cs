@@ -8,6 +8,10 @@ public class UserLoginMethodConfiguration : IEntityTypeConfiguration<UserLoginMe
 {
     public void Configure(EntityTypeBuilder<UserLoginMethod> builder)
     {
+        builder.HasKey(lm => lm.Id);
+
+        builder.HasIndex(lm => lm.DeletedAt);
+
         builder.HasIndex(ulm => new { ulm.UserId, ulm.LoginMethodCode })
             .IsUnique()
             .HasFilter("\"DeletedAt\" IS NULL");

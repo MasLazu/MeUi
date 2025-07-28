@@ -17,6 +17,7 @@ public abstract class AppException : Exception
     {
         StatusCode = statusCode;
         Errors = new List<string> { error };
+        ErrorCode = ToScreamingSnakeCase(GetType().Name.Replace("Exception", string.Empty));
     }
 
     private static string ToScreamingSnakeCase(string input)
