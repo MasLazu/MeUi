@@ -1,4 +1,5 @@
 using Ardalis.Specification;
+using MeUi.Authentication.Core.Application.Interfaces;
 using MeUi.Authentication.Core.ApplicationContract.Commands;
 using MeUi.Authentication.Core.ApplicationContract.Dtos;
 using MeUi.Authentication.Core.Domain.Entities;
@@ -9,9 +10,9 @@ namespace MeUi.Authentication.Core.Application.CommandHandlers;
 
 public class CreateUserCommandHandler : BaseCommandHandler<CreateUserCommand, Guid>
 {
-    private readonly IRepository<User> _userRepository;
+    private readonly IAuthenticationCoreRepository<User> _userRepository;
 
-    public CreateUserCommandHandler(IRepository<User> userRepository)
+    public CreateUserCommandHandler(IAuthenticationCoreRepository<User> userRepository)
     {
         _userRepository = userRepository;
     }

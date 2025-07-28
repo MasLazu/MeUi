@@ -14,6 +14,8 @@ public class LoginEndpoint : BaseEndpoint<LoginCommand, LoginResponse>
     {
         base.Configure();
         Post("/v1/auth/login");
+        AllowAnonymous();
+        Description(x => x.WithTags("Auth"));
         Summary(s =>
         {
             s.Summary = "Login user";

@@ -2,6 +2,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MeUi.Authentication.Core.Shared.Application\MeUi.Authentication.Core.Shared.Application.csproj" />
+    <ProjectReference Include="..\..\..\Private\MeUi.Authentication.Core.Application\MeUi.Authentication.Core.Application.csproj" />
+    <ProjectReference Include="..\..\..\Private\MeUi.Authentication.Core.Domain\MeUi.Authentication.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\MeUi.Authentication.Core.ApplicationContract\MeUi.Authentication.Core.ApplicationContract.csproj" />
   </ItemGroup>
 
   <ItemGroup>

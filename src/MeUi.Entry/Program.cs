@@ -22,8 +22,7 @@ builder.Services.AddAuthenticationPassword(builder.Configuration);
 builder.Services.AddFastEndpointsSwagger(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped(typeof(IReadRepositoryBase<>), typeof(Repository<>));
+// Repository registrations are now handled in specific extensions
 
 
 WebApplication app = builder.Build();

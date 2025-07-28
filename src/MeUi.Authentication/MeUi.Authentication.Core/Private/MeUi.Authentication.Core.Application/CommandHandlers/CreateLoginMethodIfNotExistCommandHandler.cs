@@ -1,3 +1,4 @@
+using MeUi.Authentication.Core.Application.Interfaces;
 using MeUi.Authentication.Core.Application.Spesifications;
 using MeUi.Authentication.Core.ApplicationContract.Commands;
 using MeUi.Authentication.Core.Domain.Entities;
@@ -8,9 +9,9 @@ namespace MeUi.Authentication.Core.Application.CommandHandlers;
 
 public class CreateLoginMethodIfNotExistCommandHandler : BaseCommandHandler<CreateLoginMethodIfNotExistCommand, Guid>
 {
-    private readonly IRepository<LoginMethod> _loginMethodRepository;
+    private readonly IAuthenticationCoreRepository<LoginMethod> _loginMethodRepository;
 
-    public CreateLoginMethodIfNotExistCommandHandler(IRepository<LoginMethod> loginMethodRepository)
+    public CreateLoginMethodIfNotExistCommandHandler(IAuthenticationCoreRepository<LoginMethod> loginMethodRepository)
     {
         _loginMethodRepository = loginMethodRepository;
     }

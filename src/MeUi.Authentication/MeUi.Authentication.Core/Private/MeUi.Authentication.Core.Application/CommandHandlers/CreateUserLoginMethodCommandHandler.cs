@@ -1,3 +1,4 @@
+using MeUi.Authentication.Core.Application.Interfaces;
 using MeUi.Authentication.Core.ApplicationContract.Commands;
 using MeUi.Authentication.Core.Domain.Entities;
 using MeUi.Shared.Application.CommandHandler;
@@ -7,9 +8,9 @@ namespace MeUi.Authentication.Core.Application.CommandHandlers;
 
 public class CreateUserLoginMethodCommandHandler : BaseCommandHandler<CreateUserLoginMethodCommand, Guid>
 {
-    private readonly IRepository<UserLoginMethod> _userLoginMethodRepository;
+    private readonly IAuthenticationCoreRepository<UserLoginMethod> _userLoginMethodRepository;
 
-    public CreateUserLoginMethodCommandHandler(IRepository<UserLoginMethod> userLoginMethodRepository)
+    public CreateUserLoginMethodCommandHandler(IAuthenticationCoreRepository<UserLoginMethod> userLoginMethodRepository)
     {
         _userLoginMethodRepository = userLoginMethodRepository;
     }

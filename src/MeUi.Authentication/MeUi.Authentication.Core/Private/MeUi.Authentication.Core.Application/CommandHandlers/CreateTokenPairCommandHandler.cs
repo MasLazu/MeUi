@@ -10,11 +10,14 @@ namespace MeUi.Authentication.Core.Application.CommandHandlers;
 
 public class CreateTokenPairCommandHandler : BaseCommandHandler<CreateTokenPairCommand, CreateTokenPairResult>
 {
-    private readonly IRepository<RefreshToken> _refreshRepository;
+    private readonly IAuthenticationCoreRepository<RefreshToken> _refreshRepository;
     private readonly IJwtService _jwtService;
-    private readonly IRepository<User> _userRepository;
+    private readonly IAuthenticationCoreRepository<User> _userRepository;
 
-    public CreateTokenPairCommandHandler(IRepository<RefreshToken> refreshRepository, IJwtService jwtService, IRepository<User> userRepository)
+    public CreateTokenPairCommandHandler(
+        IAuthenticationCoreRepository<RefreshToken> refreshRepository,
+        IJwtService jwtService,
+        IAuthenticationCoreRepository<User> userRepository)
     {
         _refreshRepository = refreshRepository;
         _jwtService = jwtService;

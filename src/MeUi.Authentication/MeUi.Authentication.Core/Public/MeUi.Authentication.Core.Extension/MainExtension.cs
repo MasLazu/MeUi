@@ -7,7 +7,7 @@ using MeUi.Authentication.Core.Infrastructure.Services;
 using MeUi.Authentication.Core.Shared.Application.Interfaces;
 using MeUi.Authentication.Core.Shared.Infrastructure.Services;
 using System.Reflection;
-
+using MeUi.Authentication.Core.Infrastructure.Data.Repositories;
 
 namespace MeUi.Authentication.Core.Extension;
 
@@ -26,6 +26,9 @@ public static class MainExtension
 
         services.AddDbContext<AuthenticationCoreDbContext>(options =>
             options.UseNpgsql(connectionString));
+
+        services.AddScoped(typeof(IAuthenticationCoreRepository<>), typeof(AuthenticationCoreRepository<>));
+        services.AddScoped<ILoginMethodSeeder, LoginMethodSeeder>();
 
         return services;
     }

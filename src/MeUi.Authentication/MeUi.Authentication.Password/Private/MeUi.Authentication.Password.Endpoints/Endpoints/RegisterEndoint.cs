@@ -3,6 +3,7 @@ using FastEndpoints;
 using MeUi.Authentication.Password.ApplicationContract.Commands;
 using MeUi.Shared.Endpoint.Endpoints;
 using MeUi.Shared.Endpoint.Responses;
+using Microsoft.AspNetCore.Http;
 
 namespace MeUi.Authentication.Password.Endpoints.Endpoints;
 
@@ -12,6 +13,8 @@ public class RegisterEndpoint : BaseEndpoint<RegisterCommand, SuccessResponse<ob
     {
         base.Configure();
         Post("/v1/auth/register");
+        AllowAnonymous();
+        Description(x => x.WithTags("Auth"));
         Summary(s =>
         {
             s.Summary = "Register new user";

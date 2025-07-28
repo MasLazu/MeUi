@@ -1,3 +1,4 @@
+using MeUi.Authentication.Core.Application.Interfaces;
 using MeUi.Authentication.Core.Application.Spesifications;
 using MeUi.Authentication.Core.ApplicationContract.Commands;
 using MeUi.Authentication.Core.Domain.Entities;
@@ -9,9 +10,9 @@ namespace MeUi.Authentication.Core.Application.CommandHandlers;
 
 public class UpdateRefreshTokenCommandHandler : BaseCommandHandler<UpdateRefreshTokenCommand, Guid>
 {
-    private readonly IRepository<RefreshToken> _refreshRepository;
+    private readonly IAuthenticationCoreRepository<RefreshToken> _refreshRepository;
 
-    public UpdateRefreshTokenCommandHandler(IRepository<RefreshToken> refreshRepository)
+    public UpdateRefreshTokenCommandHandler(IAuthenticationCoreRepository<RefreshToken> refreshRepository)
     {
         _refreshRepository = refreshRepository;
     }
