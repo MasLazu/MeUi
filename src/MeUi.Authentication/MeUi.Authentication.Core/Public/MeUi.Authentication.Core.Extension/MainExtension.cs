@@ -8,6 +8,8 @@ using MeUi.Authentication.Core.Shared.Application.Interfaces;
 using MeUi.Authentication.Core.Shared.Infrastructure.Services;
 using MeUi.Authentication.Core.Infrastructure.Data.Repositories;
 using System.Data.Common;
+using MeUi.Authentication.Core.Endpoint.Endpoints;
+using MeUi.Authentication.Core.Application.QueryHandlers;
 
 namespace MeUi.Authentication.Core.Extension;
 
@@ -15,6 +17,9 @@ public static class MainExtension
 {
     public static IServiceCollection AddAuthenticationCore(this IServiceCollection services, IConfiguration config)
     {
+        _ = typeof(GetActiveLoginMethodsEndpoint).Assembly;
+        _ = typeof(GetActiveLoginMethodsQueryHandler).Assembly;
+
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
 

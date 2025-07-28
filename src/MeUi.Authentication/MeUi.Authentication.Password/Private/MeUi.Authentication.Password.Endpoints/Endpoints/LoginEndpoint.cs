@@ -3,7 +3,6 @@ using FastEndpoints;
 using MeUi.Authentication.Password.ApplicationContract.Commands;
 using MeUi.Authentication.Password.Endpoints.Responses;
 using MeUi.Shared.Endpoint.Endpoints;
-using MeUi.Shared.Endpoint.Responses;
 using Microsoft.AspNetCore.Http;
 
 namespace MeUi.Authentication.Password.Endpoints.Endpoints;

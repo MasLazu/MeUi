@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FastEndpoints" Version="7.0.1" />
+    <PackageReference Include="FastEndpoints.Generator" Version="7.0.1" />
+    <PackageReference Include="FastEndpoints.Security" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MeUi.Shared\MeUi.Shared.Application\MeUi.Shared.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\MeUi.Shared\MeUi.Shared.Endpoint\MeUi.Shared.Endpoint.csproj" />
+    <ProjectReference Include="..\MeUi.Authentication.Core.Application\MeUi.Authentication.Core.Application.csproj" />
+  </ItemGroup>
+
+</Project>
