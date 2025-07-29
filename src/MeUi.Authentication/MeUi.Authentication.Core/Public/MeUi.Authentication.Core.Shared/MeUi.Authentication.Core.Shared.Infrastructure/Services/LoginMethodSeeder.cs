@@ -21,12 +21,12 @@ public class LoginMethodSeeder : ILoginMethodSeeder
 
         if (existingLoginMethod == null)
         {
-            await _loginMethodRepository.AddAsync(new LoginMethod()
+            _loginMethodRepository.Add(new LoginMethod()
             {
                 Code = loginMethod.Code,
                 Name = loginMethod.Name,
                 Description = loginMethod.Description,
-            });
+            }, ct);
         }
     }
 }

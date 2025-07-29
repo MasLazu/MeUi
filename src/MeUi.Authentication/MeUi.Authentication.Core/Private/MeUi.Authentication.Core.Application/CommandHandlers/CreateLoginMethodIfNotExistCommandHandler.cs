@@ -11,7 +11,9 @@ public class CreateLoginMethodIfNotExistCommandHandler : BaseCommandHandler<Crea
 {
     private readonly IAuthenticationCoreRepository<LoginMethod> _loginMethodRepository;
 
-    public CreateLoginMethodIfNotExistCommandHandler(IAuthenticationCoreRepository<LoginMethod> loginMethodRepository)
+    public CreateLoginMethodIfNotExistCommandHandler(
+        IUnitOfWork unitOfWork,
+        IAuthenticationCoreRepository<LoginMethod> loginMethodRepository) : base(unitOfWork)
     {
         _loginMethodRepository = loginMethodRepository;
     }
@@ -34,9 +36,9 @@ public class CreateLoginMethodIfNotExistCommandHandler : BaseCommandHandler<Crea
                 Description = command.Description,
             };
 
-            await _loginMethodRepository.AddAsync(loginMethod, ct);
+            _loginMethodRepository.Add(loginMethod, ct);
 
             return loginMethod.Id;
-        }, command, ct, _loginMethodRepository);
+        }, ct, _loginMethodRepository);
     }
 }

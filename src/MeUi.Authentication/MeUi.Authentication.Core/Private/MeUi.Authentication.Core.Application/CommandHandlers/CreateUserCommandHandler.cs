@@ -12,14 +12,16 @@ public class CreateUserCommandHandler : BaseCommandHandler<CreateUserCommand, Gu
 {
     private readonly IAuthenticationCoreRepository<User> _userRepository;
 
-    public CreateUserCommandHandler(IAuthenticationCoreRepository<User> userRepository)
+    public CreateUserCommandHandler(
+        IUnitOfWork unitOfWork,
+        IAuthenticationCoreRepository<User> userRepository) : base(unitOfWork)
     {
         _userRepository = userRepository;
     }
 
     public override async Task<Guid> ExecuteAsync(CreateUserCommand command, CancellationToken ct)
     {
-        return await WithTransactionAsync(async (ct) =>
+        return await WithTransactionAsync((ct) =>
         {
             var user = new User()
             {
@@ -28,9 +30,9 @@ public class CreateUserCommandHandler : BaseCommandHandler<CreateUserCommand, Gu
                 Name = command.Name,
             };
 
-            await _userRepository.AddAsync(user, ct);
+            _userRepository.Add(user, ct);
 
             return user.Id;
-        }, command, ct, _userRepository);
+        }, ct, _userRepository);
     }
 }

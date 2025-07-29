@@ -25,8 +25,11 @@ public static class MainExtension
 
         services.AddDbContext<AuthenticationCoreDbContext>((sp, opts) =>
         {
-            var conn = sp.GetRequiredService<DbConnection>();
-            opts.UseNpgsql(conn);
+            IConfigurationSection postgresSection = config.GetSection("Postgresql");
+            string connectionString = $"Host={postgresSection["Host"]};" +
+                    $"Port={postgresSection["Port"]};" + $"Username={postgresSection["Username"]};" +
+                    $"Password={postgresSection["Password"]};" + $"Database={postgresSection["Database"]};";
+            opts.UseNpgsql(connectionString);
         });
 
         services.AddScoped(typeof(IAuthenticationCoreRepository<>), typeof(AuthenticationCoreRepository<>));

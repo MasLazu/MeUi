@@ -12,7 +12,9 @@ public class UpdateRefreshTokenCommandHandler : BaseCommandHandler<UpdateRefresh
 {
     private readonly IAuthenticationCoreRepository<RefreshToken> _refreshRepository;
 
-    public UpdateRefreshTokenCommandHandler(IAuthenticationCoreRepository<RefreshToken> refreshRepository)
+    public UpdateRefreshTokenCommandHandler(
+        IUnitOfWork unitOfWork,
+        IAuthenticationCoreRepository<RefreshToken> refreshRepository) : base(unitOfWork)
     {
         _refreshRepository = refreshRepository;
     }
@@ -29,9 +31,9 @@ public class UpdateRefreshTokenCommandHandler : BaseCommandHandler<UpdateRefresh
             refreshToken.RevokedAt = command.RevokedAt ?? refreshToken.RevokedAt;
             refreshToken.UserId = command.UserId ?? refreshToken.UserId;
 
-            await _refreshRepository.UpdateAsync(refreshToken, ct);
+            _refreshRepository.Update(refreshToken, ct);
 
             return refreshToken.Id;
-        }, command, ct, _refreshRepository);
+        }, ct, _refreshRepository);
     }
 }

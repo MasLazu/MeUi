@@ -18,12 +18,14 @@ public class LoginCommandHandler : BaseCommandHandler<LoginCommand, LoginResult>
     private readonly IAuthenticationPasswordRepository<Domain.Entities.Password> _passwordRepository;
     private readonly IPasswordHasher _passwordHasher;
 
-    public LoginCommandHandler(IAuthenticationPasswordRepository<Domain.Entities.Password> passwordRepository, IPasswordHasher passwordHasher)
+    public LoginCommandHandler(
+        IUnitOfWork unitOfWork,
+        IAuthenticationPasswordRepository<Domain.Entities.Password> passwordRepository,
+        IPasswordHasher passwordHasher) : base(unitOfWork)
     {
         _passwordRepository = passwordRepository;
         _passwordHasher = passwordHasher;
     }
-
 
     public override async Task<LoginResult> ExecuteAsync(LoginCommand command, CancellationToken ct)
     {
@@ -60,6 +62,6 @@ public class LoginCommandHandler : BaseCommandHandler<LoginCommand, LoginResult>
                 AccessTokenExpiresAt = keyPair.AccessTokenExpiresAt,
                 RefreshTokenExpiresAt = keyPair.RefreshTokenExpiresAt,
             };
-        }, command, ct, _passwordRepository);
+        }, ct, _passwordRepository);
     }
 }

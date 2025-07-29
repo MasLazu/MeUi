@@ -18,7 +18,10 @@ public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, EmptyR
     private readonly IAuthenticationPasswordRepository<Domain.Entities.Password> _passwordRepository;
     private readonly IPasswordHasher _passwordHasher;
 
-    public RegisterCommandHandler(IAuthenticationPasswordRepository<Domain.Entities.Password> passwordRepository, IPasswordHasher passwordHasher)
+    public RegisterCommandHandler(
+        IUnitOfWork unitOfWork,
+        IAuthenticationPasswordRepository<Domain.Entities.Password> passwordRepository,
+        IPasswordHasher passwordHasher) : base(unitOfWork)
     {
         _passwordRepository = passwordRepository;
         _passwordHasher = passwordHasher;
@@ -42,7 +45,6 @@ public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, EmptyR
 
             var createUserCommand = new CreateUserCommand()
             {
-                Transaction = Transaction,
                 Username = command.Username,
                 Email = command.Email,
                 Name = command.Name,
@@ -57,9 +59,9 @@ public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, EmptyR
                 UserLoginMethodId = userLoginMethodId,
                 PasswordHash = _passwordHasher.HashPassword(command.Password),
             };
-            await _passwordRepository.AddAsync(password, ct);
+            _passwordRepository.Add(password, ct);
 
             return new EmptyResult();
-        }, command, ct, _passwordRepository);
+        }, ct, _passwordRepository);
     }
 }

@@ -6,6 +6,6 @@ namespace MeUi.Shared.ApplicationContract.Commands;
 
 public abstract class BaseCommand<T> : ICommand<T>
 {
-    [JsonIgnore]
-    public DbTransaction? Transaction { get; set; }
+    // [JsonIgnore]
+    // public DbTransaction? Transaction { get; set; }
 }

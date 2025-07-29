@@ -10,14 +10,16 @@ public class CreateUserLoginMethodCommandHandler : BaseCommandHandler<CreateUser
 {
     private readonly IAuthenticationCoreRepository<UserLoginMethod> _userLoginMethodRepository;
 
-    public CreateUserLoginMethodCommandHandler(IAuthenticationCoreRepository<UserLoginMethod> userLoginMethodRepository)
+    public CreateUserLoginMethodCommandHandler(
+        IUnitOfWork unitOfWork,
+        IAuthenticationCoreRepository<UserLoginMethod> userLoginMethodRepository) : base(unitOfWork)
     {
         _userLoginMethodRepository = userLoginMethodRepository;
     }
 
     public override async Task<Guid> ExecuteAsync(CreateUserLoginMethodCommand command, CancellationToken ct)
     {
-        return await WithTransactionAsync(async (ct) =>
+        return await WithTransactionAsync((ct) =>
         {
             var userLoginMethod = new UserLoginMethod()
             {
@@ -25,9 +27,9 @@ public class CreateUserLoginMethodCommandHandler : BaseCommandHandler<CreateUser
                 LoginMethodCode = command.LoginMethodCode,
             };
 
-            await _userLoginMethodRepository.AddAsync(userLoginMethod, ct);
+            _userLoginMethodRepository.Add(userLoginMethod, ct);
 
             return userLoginMethod.Id;
-        }, command, ct, _userLoginMethodRepository);
+        }, ct, _userLoginMethodRepository);
     }
 }

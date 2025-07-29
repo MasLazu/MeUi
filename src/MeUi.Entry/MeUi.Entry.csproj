@@ -28,7 +28,6 @@
     <ProjectReference Include="..\MeUi.Shared\MeUi.Shared.Endpoint\MeUi.Shared.Endpoint.csproj" />
     <ProjectReference Include="..\MeUi.Authentication\MeUi.Authentication.Core\Public\MeUi.Authentication.Core.Extension\MeUi.Authentication.Core.Extension.csproj" />
     <ProjectReference Include="..\MeUi.Authentication\MeUi.Authentication.Password\Private\MeUi.Authentication.Password.Endpoints\MeUi.Authentication.Password.Endpoints.csproj" />
-    <ProjectReference Include="..\MeUi.Authentication\MeUi.Authentication.Core\Private\MeUi.Authentication.Core.Endpoints\MeUi.Authentication.Core.Endpoints.csproj" />
     <ProjectReference Include="..\MeUi.Authentication\MeUi.Authentication.Password\Public\MeUi.Authentication.Password.Extenstion\MeUi.Authentication.Password.Extenstion.csproj" />
 
   </ItemGroup>

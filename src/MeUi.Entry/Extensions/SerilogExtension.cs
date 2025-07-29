@@ -9,9 +9,7 @@ public static class SerilogExtension
 {
     public static IApplicationBuilder UseCustomSerilogRequestLogging(this IApplicationBuilder app)
     {
-        app.UseSerilogRequestLogging(options =>
-        {
-            options.GetLevel = (httpContext, elapsed, ex) =>
+        app.UseSerilogRequestLogging(options => options.GetLevel = (httpContext, elapsed, ex) =>
             {
                 if (ex is AppException || ex is FastEndpoints.ValidationFailureException || ex is JsonException || ex is FormatException)
                 {
@@ -19,8 +17,7 @@ public static class SerilogExtension
                 }
 
                 return ex != null ? LogEventLevel.Error : LogEventLevel.Information;
-            };
-        });
+            });
 
         return app;
     }

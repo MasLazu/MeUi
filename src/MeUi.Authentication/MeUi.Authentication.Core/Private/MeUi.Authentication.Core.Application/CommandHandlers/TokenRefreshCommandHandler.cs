@@ -5,6 +5,7 @@ using MeUi.Authentication.Core.Application.Spesifications;
 using MeUi.Authentication.Core.ApplicationContract.Commands;
 using MeUi.Authentication.Core.Domain.Entities;
 using MeUi.Shared.Application.CommandHandler;
+using MeUi.Shared.Application.interfaces;
 
 namespace MeUi.Authentication.Core.Application.CommandHandlers;
 
@@ -12,7 +13,9 @@ public class TokenRefreshCommandHandler : BaseCommandHandler<TokenRefreshCommand
 {
     private readonly IAuthenticationCoreRepository<RefreshToken> _refreshTokenRepository;
 
-    public TokenRefreshCommandHandler(IAuthenticationCoreRepository<RefreshToken> refreshTokenRepository)
+    public TokenRefreshCommandHandler(
+        IUnitOfWork unitOfWork,
+        IAuthenticationCoreRepository<RefreshToken> refreshTokenRepository) : base(unitOfWork)
     {
         _refreshTokenRepository = refreshTokenRepository;
     }
@@ -21,18 +24,17 @@ public class TokenRefreshCommandHandler : BaseCommandHandler<TokenRefreshCommand
     {
         return await WithTransactionAsync(async (ct) =>
         {
-            var refreshToken = await _refreshTokenRepository.FirstOrDefaultAsync(new RefreshTokenByTokenSpesification(command.RefreshToken), ct);
+            RefreshToken? refreshToken = await _refreshTokenRepository.FirstOrDefaultAsync(new RefreshTokenByTokenSpesification(command.RefreshToken), ct);
             if (refreshToken == null || refreshToken.RevokedAt != null)
             {
                 throw new InvalidRefreshTokenException();
             }
 
             refreshToken.RevokedAt = DateTime.Now;
-            await _refreshTokenRepository.UpdateAsync(refreshToken, ct);
+            _refreshTokenRepository.Update(refreshToken, ct);
 
-            var keyPair = await new CreateTokenPairCommand()
+            CreateTokenPairResult keyPair = await new CreateTokenPairCommand()
             {
-                Transaction = Transaction,
                 UserId = refreshToken.UserId
             }.ExecuteAsync(ct);
 
@@ -43,6 +45,6 @@ public class TokenRefreshCommandHandler : BaseCommandHandler<TokenRefreshCommand
                 RefreshToken = keyPair.RefreshToken,
                 RefreshTokenExpiresAt = keyPair.RefreshTokenExpiresAt,
             };
-        }, command, ct, _refreshTokenRepository);
+        }, ct, _refreshTokenRepository);
     }
 }

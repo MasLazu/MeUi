@@ -17,7 +17,8 @@ public class CreateTokenPairCommandHandler : BaseCommandHandler<CreateTokenPairC
     public CreateTokenPairCommandHandler(
         IAuthenticationCoreRepository<RefreshToken> refreshRepository,
         IJwtService jwtService,
-        IAuthenticationCoreRepository<User> userRepository)
+        IUnitOfWork unitOfWork,
+        IAuthenticationCoreRepository<User> userRepository) : base(unitOfWork)
     {
         _refreshRepository = refreshRepository;
         _jwtService = jwtService;
@@ -34,7 +35,7 @@ public class CreateTokenPairCommandHandler : BaseCommandHandler<CreateTokenPairC
 
             RefreshToken refreshToken = _jwtService.GenerateRefreshToken(command.UserId);
 
-            await _refreshRepository.AddAsync(refreshToken, ct);
+            _refreshRepository.Add(refreshToken, ct);
 
             return new CreateTokenPairResult()
             {
@@ -43,6 +44,6 @@ public class CreateTokenPairCommandHandler : BaseCommandHandler<CreateTokenPairC
                 RefreshToken = refreshToken.Token,
                 RefreshTokenExpiresAt = refreshToken.ExpiresAt,
             };
-        }, command, ct, _refreshRepository);
+        }, ct, _refreshRepository);
     }
 }

@@ -10,14 +10,16 @@ public class CreateRefreshTokenCommandHandler : BaseCommandHandler<CreateRefresh
 {
     private readonly IAuthenticationCoreRepository<RefreshToken> _refreshRepository;
 
-    public CreateRefreshTokenCommandHandler(IAuthenticationCoreRepository<RefreshToken> refreshRepository)
+    public CreateRefreshTokenCommandHandler(
+        IUnitOfWork unitOfWork,
+        IAuthenticationCoreRepository<RefreshToken> refreshRepository) : base(unitOfWork)
     {
         _refreshRepository = refreshRepository;
     }
 
     public override async Task<Guid> ExecuteAsync(CreateRefreshTokenCommand command, CancellationToken ct)
     {
-        return await WithTransactionAsync(async (ct) =>
+        return await WithTransactionAsync((ct) =>
         {
             var refreshToken = new RefreshToken()
             {
@@ -27,9 +29,9 @@ public class CreateRefreshTokenCommandHandler : BaseCommandHandler<CreateRefresh
                 UserId = command.UserId,
             };
 
-            await _refreshRepository.AddAsync(refreshToken, ct);
+            _refreshRepository.Add(refreshToken, ct);
 
             return refreshToken.Id;
-        }, command, ct, _refreshRepository);
+        }, ct, _refreshRepository);
     }
 }

@@ -7,61 +7,46 @@ namespace MeUi.Shared.Application.CommandHandler;
 
 public abstract class BaseCommandHandler<TCommand, TResult> : ICommandHandler<TCommand, TResult> where TCommand : BaseCommand<TResult>
 {
-    public DbTransaction? Transaction;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public BaseCommandHandler(IUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+    }
 
     public abstract Task<TResult> ExecuteAsync(TCommand command, CancellationToken ct);
 
     public async Task<TResult> WithTransactionAsync(
         Func<CancellationToken, Task<TResult>> action,
-        BaseCommand<TResult> command,
         CancellationToken ct,
-        params IRepository[] repositories)
+        params IAppRepositoryBase[] repositories)
     {
         ct.ThrowIfCancellationRequested();
+        bool ownTransaction = _unitOfWork.CountRepisotries() == 0;
+        _unitOfWork.AddRepositories(repositories);
 
-        IRepository? mainRepository = null;
-        bool ownsTransaction = false;
-        Transaction = command.Transaction;
-
-        if (Transaction == null)
+        TResult result = await action(ct);
+        if (ownTransaction)
         {
-            foreach (IRepository repository in repositories)
-            {
-                if (repository.GetTransaction() == null)
-                {
-                    Transaction = await repository.BeginTransactionAsync(ct);
-                    mainRepository = repository;
-                    ownsTransaction = true;
-                    break;
-                }
-            }
+            await _unitOfWork.SaveChangesAsync(ct);
         }
-
-        foreach (IRepository repository in repositories)
-        {
-            if (repository.GetTransaction() == null && Transaction != null)
-            {
-                await repository.UseTransactionAsync(Transaction, ct);
-            }
-        }
-
-        try
-        {
-            TResult result = await action(ct);
-            if (ownsTransaction && mainRepository != null)
-            {
-                await mainRepository.CommitTransactionAsync(ct);
-            }
-            return result;
-        }
-        catch
-        {
-            if (ownsTransaction && mainRepository != null)
-            {
-                await mainRepository.RollbbackTransactionAsync(ct);
-            }
-            throw;
-        }
+        return result;
     }
 
+    public async Task<TResult> WithTransactionAsync(
+        Func<CancellationToken, TResult> action,
+        CancellationToken ct,
+        params IAppRepositoryBase[] repositories)
+    {
+        ct.ThrowIfCancellationRequested();
+        bool ownTransaction = _unitOfWork.CountRepisotries() == 0;
+        _unitOfWork.AddRepositories(repositories);
+
+        TResult result = action(ct);
+        if (ownTransaction)
+        {
+            await _unitOfWork.SaveChangesAsync(ct);
+        }
+        return result;
+    }
 }
