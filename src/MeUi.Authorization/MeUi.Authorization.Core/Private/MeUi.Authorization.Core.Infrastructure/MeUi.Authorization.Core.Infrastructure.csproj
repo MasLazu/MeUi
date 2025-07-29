@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\MeUi.Authorization.Core.Application\MeUi.Authorization.Core.Application.csproj" />
+    <ProjectReference Include="..\MeUi.Authorization.Core.Domain\MeUi.Authorization.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\MeUi.Shared\MeUi.Shared.Infrastructure\MeUi.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\..\MeUi.Shared\MeUi.Shared.Domain\MeUi.Shared.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\MeUi.Shared\MeUi.Shared.Application\MeUi.Shared.Application.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

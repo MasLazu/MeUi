@@ -21,5 +21,14 @@ public class UserLoginMethodConfiguration : IEntityTypeConfiguration<UserLoginMe
 
         builder.Property(ulm => ulm.UserId)
             .IsRequired();
+
+        builder.HasOne(ulm => ulm.User)
+            .WithMany(u => u.LoginMethods)
+            .HasForeignKey(ulm => ulm.UserId);
+
+        builder.HasOne(ulm => ulm.LoginMethod)
+            .WithMany(lm => lm.UserLoginMethods)
+            .HasForeignKey(ulm => ulm.LoginMethodCode)
+            .HasPrincipalKey(lm => lm.Code);
     }
 }

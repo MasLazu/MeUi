@@ -27,6 +27,7 @@ public class LoginMethodSeeder : ILoginMethodSeeder
                 Name = loginMethod.Name,
                 Description = loginMethod.Description,
             }, ct);
+            await _loginMethodRepository.SaveChangesAsync(ct);
         }
     }
 }

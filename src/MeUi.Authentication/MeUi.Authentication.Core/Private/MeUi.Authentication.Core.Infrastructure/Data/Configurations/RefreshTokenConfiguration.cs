@@ -29,5 +29,9 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
 
         builder.HasIndex(rt => rt.ExpiresAt);
         builder.HasIndex(rt => rt.RevokedAt);
+
+        builder.HasOne(rt => rt.User)
+            .WithMany()
+            .HasForeignKey(rt => rt.UserId);
     }
 }

@@ -26,5 +26,10 @@ public class LoginMethodConfiguration : IEntityTypeConfiguration<LoginMethod>
         builder.Property(lm => lm.Code)
             .IsRequired()
             .HasMaxLength(255);
+
+        builder.HasMany(lm => lm.UserLoginMethods)
+            .WithOne(ulm => ulm.LoginMethod)
+            .HasPrincipalKey(lm => lm.Code)
+            .HasForeignKey(ulm => ulm.LoginMethodCode);
     }
 }

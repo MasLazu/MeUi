@@ -8,5 +8,5 @@ public class UserLoginMethod : BaseEntity
     public string LoginMethodCode { get; set; } = string.Empty;
 
     public User? User { get; set; }
-    public LoginMethod? LoginMethodEntity { get; set; }
+    public LoginMethod? LoginMethod { get; set; }
 }

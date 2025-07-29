@@ -25,7 +25,7 @@ public class GetLoginMethodsEndpoint : BaseEndpointWithoutRequest<SuccessRespons
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var loginMethods = await new GetLoginMethodsQuery().ExecuteAsync(ct);
+        IEnumerable<LoginMethodDto> loginMethods = await new GetLoginMethodsQuery().ExecuteAsync(ct);
 
         var response = new SuccessResponse<IEnumerable<LoginMethodDto>>(
             loginMethods,

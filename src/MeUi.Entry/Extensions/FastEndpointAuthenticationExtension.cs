@@ -8,7 +8,7 @@ namespace MeUi.Entry.Extensions;
 
 public static class AuthenticationExtension
 {
-    public static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddFastEndpointAuthentication(this IServiceCollection services, IConfiguration config)
     {
         string jwtSecret = config["Jwt:Secret"] ?? throw new InvalidOperationException("JWT Secret is not configured.");
         string jwtIssuer = config["Jwt:Issuer"] ?? throw new InvalidOperationException("JWT Issuer is not configured.");

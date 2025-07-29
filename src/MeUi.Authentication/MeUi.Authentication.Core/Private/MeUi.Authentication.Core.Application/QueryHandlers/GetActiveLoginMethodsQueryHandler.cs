@@ -19,7 +19,7 @@ public class GetActiveLoginMethodsQueryHandler : ICommandHandler<GetActiveLoginM
 
     public async Task<IEnumerable<LoginMethodDto>> ExecuteAsync(GetActiveLoginMethodsQuery command, CancellationToken ct)
     {
-        List<LoginMethod> loginMethods = await _loginMethodRepository.ListAsync(new ActiveLoginMethodSPesification(), ct);
+        List<LoginMethod> loginMethods = await _loginMethodRepository.ListAsync(new ActiveLoginMethodSpesification(), ct);
 
         return loginMethods.Select(lm => new LoginMethodDto()
         {

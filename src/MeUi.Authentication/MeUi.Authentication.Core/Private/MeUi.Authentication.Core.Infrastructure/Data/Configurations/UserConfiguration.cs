@@ -31,5 +31,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(u => u.Email)
             .HasMaxLength(255);
+
+        builder.HasMany(u => u.LoginMethods)
+            .WithOne(ulm => ulm.User);
+
+        builder.HasMany(u => u.RefreshTokens)
+            .WithOne(rt => rt.User);
     }
 }

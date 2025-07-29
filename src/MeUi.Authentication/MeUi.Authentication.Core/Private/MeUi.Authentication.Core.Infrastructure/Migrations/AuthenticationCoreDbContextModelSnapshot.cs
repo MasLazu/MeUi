@@ -171,10 +171,7 @@ namespace MeUi.Authentication.Core.Infrastructure.Migrations
 
                     b.Property<string>("LoginMethodCode")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("LoginMethodEntityId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("character varying(255)");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -186,7 +183,7 @@ namespace MeUi.Authentication.Core.Infrastructure.Migrations
 
                     b.HasIndex("DeletedAt");
 
-                    b.HasIndex("LoginMethodEntityId");
+                    b.HasIndex("LoginMethodCode");
 
                     b.HasIndex("UserId", "LoginMethodCode")
                         .IsUnique()
@@ -198,7 +195,7 @@ namespace MeUi.Authentication.Core.Infrastructure.Migrations
             modelBuilder.Entity("MeUi.Authentication.Core.Domain.Entities.RefreshToken", b =>
                 {
                     b.HasOne("MeUi.Authentication.Core.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("RefreshTokens")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -208,9 +205,12 @@ namespace MeUi.Authentication.Core.Infrastructure.Migrations
 
             modelBuilder.Entity("MeUi.Authentication.Core.Domain.Entities.UserLoginMethod", b =>
                 {
-                    b.HasOne("MeUi.Authentication.Core.Domain.Entities.LoginMethod", "LoginMethodEntity")
+                    b.HasOne("MeUi.Authentication.Core.Domain.Entities.LoginMethod", "LoginMethod")
                         .WithMany("UserLoginMethods")
-                        .HasForeignKey("LoginMethodEntityId");
+                        .HasForeignKey("LoginMethodCode")
+                        .HasPrincipalKey("Code")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MeUi.Authentication.Core.Domain.Entities.User", "User")
                         .WithMany("LoginMethods")
@@ -218,7 +218,7 @@ namespace MeUi.Authentication.Core.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("LoginMethodEntity");
+                    b.Navigation("LoginMethod");
 
                     b.Navigation("User");
                 });
@@ -231,6 +231,8 @@ namespace MeUi.Authentication.Core.Infrastructure.Migrations
             modelBuilder.Entity("MeUi.Authentication.Core.Domain.Entities.User", b =>
                 {
                     b.Navigation("LoginMethods");
+
+                    b.Navigation("RefreshTokens");
                 });
 #pragma warning restore 612, 618
         }

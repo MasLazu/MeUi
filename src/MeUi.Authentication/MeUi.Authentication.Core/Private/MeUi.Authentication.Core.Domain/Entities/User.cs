@@ -10,4 +10,5 @@ public class User : BaseEntity
     public bool IsSuspended { get; set; } = false;
 
     public ICollection<UserLoginMethod> LoginMethods { get; set; } = new HashSet<UserLoginMethod>();
+    public ICollection<RefreshToken> RefreshTokens { get; set; } = new HashSet<RefreshToken>();
 }
