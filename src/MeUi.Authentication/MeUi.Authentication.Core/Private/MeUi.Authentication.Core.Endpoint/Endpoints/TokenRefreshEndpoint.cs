@@ -7,10 +7,11 @@ using FastEndpoints;
 using System.Net;
 using MeUi.Authentication.Core.ApplicationContract.Commands;
 using MeUi.Authentication.Core.Endpoint.Responses;
+using MeUi.Shared.Application.Exceptions;
 
 namespace MeUi.Authentication.Core.Endpoint.Endpoints;
 
-public class TokenRefreshEndpoint : BaseEndpoint<TokenRefreshCommand, TokenRefreshResponse>
+public class TokenRefreshEndpoint : BaseEndpointWithoutRequest<TokenRefreshResponse>
 {
     public override void Configure()
     {
@@ -25,9 +26,19 @@ public class TokenRefreshEndpoint : BaseEndpoint<TokenRefreshCommand, TokenRefre
         });
     }
 
-    public override async Task HandleAsync(TokenRefreshCommand req, CancellationToken ct)
+    public override async Task HandleAsync(CancellationToken ct)
     {
-        TokenRefreshResult result = await req.ExecuteAsync(ct);
+        string? refreshToken = HttpContext.Request.Cookies["refreshToken"];
+
+        if (string.IsNullOrEmpty(refreshToken))
+        {
+            throw new UnauthorizedException("Refresh token not found.");
+        }
+
+        TokenRefreshResult result = await new TokenRefreshCommand()
+        {
+            RefreshToken = refreshToken
+        }.ExecuteAsync(ct);
 
         HttpContext.Response.Cookies.Append("refreshToken", result.RefreshToken, new CookieOptions
         {

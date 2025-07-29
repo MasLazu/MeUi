@@ -30,7 +30,7 @@ public class TokenRefreshCommandHandler : BaseCommandHandler<TokenRefreshCommand
                 throw new InvalidRefreshTokenException();
             }
 
-            refreshToken.RevokedAt = DateTime.Now;
+            refreshToken.RevokedAt = DateTime.UtcNow;
             _refreshTokenRepository.Update(refreshToken, ct);
 
             CreateTokenPairResult keyPair = await new CreateTokenPairCommand()
