@@ -7,8 +7,8 @@ public abstract class BasePaginationQuery<T> : ICommand<BasePaginationQueryResul
     public int Page = 1;
     public int PageSize = 10;
     public string? search;
-    public ICollection<FilterPaginationQuery> filters { get; set; } = new List<FilterPaginationQuery>();
-    public ICollection<SortPaginationQuery> sorts { get; set; } = new List<SortPaginationQuery>();
+    public ICollection<FilterPaginationQuery> Filters { get; set; } = new List<FilterPaginationQuery>();
+    public ICollection<SortPaginationQuery> Sorts { get; set; } = new List<SortPaginationQuery>();
 }
 
 public class FilterPaginationQuery

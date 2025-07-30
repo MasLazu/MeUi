@@ -4,4 +4,4 @@ using MeUi.Shared.ApplicationContract.Queries;
 
 namespace MeUi.Authorization.Rbac.ApplicationContract.Queries;
 
-public class GetRolesPaginationQuery : ICommand<BasePaginationQuery<RoleDto>> { }
+public class GetRolesPaginationQuery : BasePaginationQuery<RoleDto> { }
