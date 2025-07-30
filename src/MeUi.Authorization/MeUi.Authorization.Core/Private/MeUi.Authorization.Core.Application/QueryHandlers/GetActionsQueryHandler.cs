@@ -2,7 +2,6 @@ using FastEndpoints;
 using MeUi.Authorization.Core.Application.Interfaces;
 using MeUi.Authorization.Core.ApplicationContract.Dtos;
 using MeUi.Authorization.Core.ApplicationContract.Queries;
-using MeUi.Authorization.Core.Domain.Entities;
 using Ardalis.Specification;
 using MeUi.Authorization.Core.Application.Spesifications;
 

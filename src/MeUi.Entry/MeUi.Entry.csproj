@@ -30,6 +30,7 @@
     <ProjectReference Include="..\MeUi.Authentication\MeUi.Authentication.Password\Private\MeUi.Authentication.Password.Endpoints\MeUi.Authentication.Password.Endpoints.csproj" />
     <ProjectReference Include="..\MeUi.Authentication\MeUi.Authentication.Password\Public\MeUi.Authentication.Password.Extenstion\MeUi.Authentication.Password.Extenstion.csproj" />
     <ProjectReference Include="..\MeUi.Authorization\MeUi.Authorization.Core\Public\MeUi.Authorization.Core.Extension\MeUi.Authorization.Core.Extension.csproj" />
+    <ProjectReference Include="..\MeUi.Authorization\MeUi.Authorization.Rbac\Public\MeUi.Authorization.Rbac.Extension\MeUi.Authorization.Rbac.Extension.csproj" />
 
   </ItemGroup>
 

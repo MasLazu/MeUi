@@ -1,8 +1,5 @@
-using System.Net;
-using FastEndpoints;
 using MeUi.Authorization.Core.Application.Interfaces;
 using MeUi.Shared.Endpoint.Endpoints;
-using MeUi.Shared.Endpoint.Responses;
 
 namespace MeUi.Authorization.Core.Shared.Endpoint.Endpoints;
 

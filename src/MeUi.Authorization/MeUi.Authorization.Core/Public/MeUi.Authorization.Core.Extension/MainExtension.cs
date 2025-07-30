@@ -4,7 +4,6 @@ using MeUi.Authorization.Core.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using MeUi.Authorization.Core.Application.Interfaces;
 using MeUi.Authorization.Core.Infrastructure.Data.Repositories;
-using System.Data.Common;
 using MeUi.Authorization.Core.Endpoint.Endpoints;
 using MeUi.Authorization.Core.Application.QueryHandlers;
 using MeUi.Authorization.Core.Infrastructure.Data.Seeders;
@@ -28,9 +27,10 @@ public static class MainExtension
         });
 
         services.AddScoped(typeof(IAuthorizationCoreRepository<>), typeof(AuthorizationCoreRepository<>));
-        services.AddHostedService<ActionSeeder>();
-        services.AddHostedService<ResourceSeeder>();
-        services.AddHostedService<ResourceActionSeeder>();
+        services.AddScoped<ActionSeeder>();
+        services.AddScoped<ResourceSeeder>();
+        services.AddScoped<ResourceActionSeeder>();
+        services.AddHostedService<AuthorizationCoreSeeder>();
 
         return services;
     }

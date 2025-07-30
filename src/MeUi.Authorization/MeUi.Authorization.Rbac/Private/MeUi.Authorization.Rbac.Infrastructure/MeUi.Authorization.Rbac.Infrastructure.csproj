@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\MeUi.Authorization.Rbac.Application\MeUi.Authorization.Rbac.Application.csproj" />
+    <ProjectReference Include="..\MeUi.Authorization.Rbac.Domain\MeUi.Authorization.Rbac.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\MeUi.Shared\MeUi.Shared.Infrastructure\MeUi.Shared.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Public\MeUi.Authorization.Rbac.ApplicationContract\MeUi.Authorization.Rbac.ApplicationContract.csproj" />
+    <ProjectReference Include="..\..\..\..\MeUi.Shared\MeUi.Shared.Endpoint\MeUi.Shared.Endpoint.csproj" />
+    <ProjectReference Include="..\..\..\MeUi.Authorization.Core\Public\MeUi.Authorization.Core.Shared\MeUi.Authorization.Core.Shared.Endpoint\MeUi.Authorization.Core.Shared.Endpoint.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

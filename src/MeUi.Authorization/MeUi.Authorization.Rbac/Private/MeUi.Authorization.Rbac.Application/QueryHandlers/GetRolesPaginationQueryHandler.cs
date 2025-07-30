@@ -1,0 +1,1 @@
+namespace MeUi.Authorization.Rbac.Application.QueryHandlers;

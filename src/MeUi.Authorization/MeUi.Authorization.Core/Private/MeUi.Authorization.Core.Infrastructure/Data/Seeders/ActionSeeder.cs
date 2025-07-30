@@ -1,12 +1,11 @@
 using MeUi.Authorization.Core.Application.Interfaces;
 using MeUi.Authorization.Core.Application.Spesifications;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System.Reflection;
 
 namespace MeUi.Authorization.Core.Infrastructure.Data.Seeders;
 
-public class ActionSeeder : BackgroundService
+public class ActionSeeder
 {
     private readonly IServiceProvider _serviceProvider;
 
@@ -15,7 +14,7 @@ public class ActionSeeder : BackgroundService
         _serviceProvider = serviceProvider;
     }
 
-    protected override async Task ExecuteAsync(CancellationToken ct)
+    public async Task SeedAsync(CancellationToken ct)
     {
         IEnumerable<Type> providerTypes = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a => a.GetTypes())

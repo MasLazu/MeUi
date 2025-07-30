@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace MeUi.Authorization.Core.Infrastructure.Data.Seeders;
 
-public class ResourceSeeder : BackgroundService
+public class ResourceSeeder
 {
     private readonly IServiceProvider _serviceProvider;
 
@@ -16,7 +16,7 @@ public class ResourceSeeder : BackgroundService
         _serviceProvider = serviceProvider;
     }
 
-    protected override async Task ExecuteAsync(CancellationToken ct)
+    public async Task SeedAsync(CancellationToken ct)
     {
         IEnumerable<Type> providerTypes = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a => a.GetTypes())
