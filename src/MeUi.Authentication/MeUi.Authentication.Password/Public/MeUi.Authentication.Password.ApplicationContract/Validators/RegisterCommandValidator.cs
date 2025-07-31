@@ -1,9 +1,8 @@
-using System.Data;
 using FastEndpoints;
 using FluentValidation;
 using MeUi.Authentication.Password.ApplicationContract.Commands;
 
-namespace MeUi.Authentication.Password.Application.Validators;
+namespace MeUi.Authentication.Password.ApplicationContract.Validators;
 
 public class RegisterCommandValidator : Validator<RegisterCommand>
 {
