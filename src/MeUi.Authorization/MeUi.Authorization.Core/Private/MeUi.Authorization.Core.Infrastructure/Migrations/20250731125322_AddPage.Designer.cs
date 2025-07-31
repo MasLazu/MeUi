@@ -3,6 +3,7 @@ using System;
 using MeUi.Authorization.Core.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MeUi.Authorization.Core.Infrastructure.Migrations
 {
     [DbContext(typeof(AuthorizationCoreDbContext))]
-    partial class AuthorizationCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250731125322_AddPage")]
+    partial class AddPage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

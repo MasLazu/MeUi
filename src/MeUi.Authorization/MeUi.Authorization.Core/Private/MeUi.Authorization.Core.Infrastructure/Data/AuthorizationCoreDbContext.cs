@@ -10,6 +10,9 @@ public class AuthorizationCoreDbContext : BaseDbContext<AuthorizationCoreDbConte
     public DbSet<Resource> Resources { get; set; }
     public DbSet<Domain.Entities.Action> Actions { get; set; }
     public DbSet<ResourceAction> ResourceActions { get; set; }
+    public DbSet<PageGroup> PageGroups { get; set; }
+    public DbSet<Page> Pages { get; set; }
+    public DbSet<PageResourceAction> PageResourceActions { get; set; }
 
     public AuthorizationCoreDbContext(DbContextOptions<AuthorizationCoreDbContext> options) : base(options) { }
 

@@ -9,4 +9,5 @@ public class ResourceAction : BaseEntity
 
     public Resource? Resource { get; set; }
     public Action? Action { get; set; }
+    public ICollection<PageResourceAction> PageResourceActions { get; set; } = new HashSet<PageResourceAction>();
 }
