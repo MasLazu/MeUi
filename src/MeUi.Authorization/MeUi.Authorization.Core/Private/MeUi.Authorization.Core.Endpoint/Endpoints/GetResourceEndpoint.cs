@@ -15,7 +15,7 @@ public class GetResourcesEndpoint : EndpointWithAuthorizationWithoutRequest<GetR
     public override void Configure()
     {
         base.Configure();
-        Get("/v1/resource");
+        Get("/v1/resources");
         Description(x => x.WithTags("Resources"));
         Summary(s =>
         {

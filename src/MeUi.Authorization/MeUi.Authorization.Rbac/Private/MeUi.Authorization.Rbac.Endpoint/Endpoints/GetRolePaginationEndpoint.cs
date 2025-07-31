@@ -16,7 +16,7 @@ public class GetRolePaginationEndpoint : EndointWithAuthorization<GetRolePaginat
     public override void Configure()
     {
         base.Configure();
-        Post("/v1/role/pagination");
+        Post("/v1/roles/pagination");
         Description(x => x.WithTags("Role"));
         Summary(s =>
         {

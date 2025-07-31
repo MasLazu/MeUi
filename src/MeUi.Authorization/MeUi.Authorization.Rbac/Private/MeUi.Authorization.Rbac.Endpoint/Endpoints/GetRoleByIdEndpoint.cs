@@ -15,7 +15,7 @@ public class GetRoleByIdEndpoint : EndointWithAuthorization<GetRoleByIdEndpoint,
     public override void Configure()
     {
         base.Configure();
-        Get("/v1/role/{id}");
+        Get("/v1/roles/{id}");
         Description(x => x.WithTags("Role"));
         Summary(s =>
         {

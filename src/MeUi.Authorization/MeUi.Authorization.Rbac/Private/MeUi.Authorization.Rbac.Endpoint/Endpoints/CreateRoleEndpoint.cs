@@ -13,7 +13,7 @@ public class CreateRoleEndpoint : EndointWithAuthorization<CreateRoleEndpoint, C
     public override void Configure()
     {
         base.Configure();
-        Post("/v1/role");
+        Post("/v1/roles");
         Description(x => x.WithTags("Role"));
         Summary(s =>
         {

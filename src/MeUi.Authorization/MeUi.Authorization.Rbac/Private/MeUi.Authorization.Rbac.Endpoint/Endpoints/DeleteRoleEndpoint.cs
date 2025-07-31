@@ -13,7 +13,7 @@ public class DeleteRoleEndpoint : EndointWithAuthorization<DeleteRoleEndpoint, D
     public override void Configure()
     {
         base.Configure();
-        Delete("/v1/role/{id}");
+        Delete("/v1/roles/{id}");
         Description(x => x.WithTags("Role"));
         Summary(s =>
         {

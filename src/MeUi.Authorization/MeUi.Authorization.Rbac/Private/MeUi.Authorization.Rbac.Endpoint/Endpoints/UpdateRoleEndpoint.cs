@@ -13,7 +13,7 @@ public class UpdateRoleEndpoint : EndointWithAuthorization<UpdateRoleEndpoint, U
     public override void Configure()
     {
         base.Configure();
-        Put("/v1/role");
+        Put("/v1/roles/{id}");
         Description(x => x.WithTags("Role"));
         Summary(s =>
         {
