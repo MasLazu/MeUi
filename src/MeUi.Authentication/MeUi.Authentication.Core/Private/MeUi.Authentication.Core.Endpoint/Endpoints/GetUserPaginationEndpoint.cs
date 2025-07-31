@@ -16,7 +16,6 @@ public class GetUserPaginationEndpoint : EndointWithAuthorization<GetUserPaginat
     {
         base.Configure();
         Post("/v1/users/Pagination");
-        AllowAnonymous();
         Description(x => x.WithTags("User"));
         Summary(s =>
         {

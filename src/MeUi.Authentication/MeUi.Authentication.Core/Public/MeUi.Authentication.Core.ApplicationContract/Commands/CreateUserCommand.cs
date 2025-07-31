@@ -1,4 +1,3 @@
-using FastEndpoints;
 using MeUi.Shared.ApplicationContract.Commands;
 
 namespace MeUi.Authentication.Core.ApplicationContract.Commands;

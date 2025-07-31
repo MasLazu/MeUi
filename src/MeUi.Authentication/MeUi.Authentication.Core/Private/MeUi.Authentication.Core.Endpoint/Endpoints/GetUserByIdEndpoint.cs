@@ -16,7 +16,6 @@ public class GetUserByIdEndpoint : EndointWithAuthorization<GetUserByIdEndpoint,
     {
         base.Configure();
         Get("/v1/users/{id}");
-        AllowAnonymous();
         Description(x => x.WithTags("User"));
         Summary(s =>
         {
