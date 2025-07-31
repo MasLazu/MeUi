@@ -2,11 +2,11 @@ using FastEndpoints;
 
 namespace MeUi.Shared.ApplicationContract.Queries;
 
-public abstract class BasePaginationQuery<T> : ICommand<BasePaginationQueryResult<T>>
+public class BasePaginationQuery<T> : ICommand<BasePaginationQueryResult<T>>
 {
     public int Page = 1;
     public int PageSize = 10;
-    public string? search;
+    public string? Search;
     public ICollection<FilterPaginationQuery> Filters { get; set; } = new List<FilterPaginationQuery>();
     public ICollection<SortPaginationQuery> Sorts { get; set; } = new List<SortPaginationQuery>();
 }

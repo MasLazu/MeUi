@@ -6,14 +6,11 @@ using MeUi.Shared.ApplicationContract.Queries;
 
 namespace MeUi.Authorization.Rbac.Application.Spesifications;
 
-public class RolePaginationSpesification : BasePaginationSpecification<Role>
+public class RoleCountSpesification : BasePaginationSpecification<Role>
 {
-    public RolePaginationSpesification(BasePaginationQuery<Role> query)
+    public RoleCountSpesification(BasePaginationQuery<Role> query)
     {
-        Query
-            .Include(r => r.RoleResourceActions)
-            .Where(r => r.DeletedAt == null);
-
-        ApplyPagination(query);
+        Query.Where(r => r.DeletedAt == null);
+        ApplyFiltering(query);
     }
 }

@@ -22,10 +22,10 @@ public class GetRoleByIdQueryHandler : ICommandHandler<GetRoleByIdQuery, RoleDto
 
     public async Task<RoleDto> ExecuteAsync(GetRoleByIdQuery command, CancellationToken ct)
     {
-        var role = await _roleRepository.FirstOrDefaultAsync(new RoleByIdSPesification(command.Id), ct) ??
+        Role role = await _roleRepository.FirstOrDefaultAsync(new RoleByIdSPesification(command.Id), ct) ??
             throw new NotFoundException("Role not found");
 
-        var resourceActionIds = role.RoleResourceActions.Select(rra => rra.ResourceActionId).Distinct();
+        IEnumerable<Guid> resourceActionIds = role.RoleResourceActions.Select(rra => rra.ResourceActionId).Distinct();
         IEnumerable<ResourceActionDto> resourceActions = new HashSet<ResourceActionDto>();
         if (resourceActionIds != null && resourceActionIds.Any())
         {
