@@ -19,7 +19,6 @@
     <ProjectReference Include="..\..\Private\MeUi.Authentication.Core.Domain\MeUi.Authentication.Core.Domain.csproj" />
     <ProjectReference Include="..\..\Private\MeUi.Authentication.Core.Endpoint\MeUi.Authentication.Core.Endpoint.csproj" />
     <ProjectReference Include="..\MeUi.Authentication.Core.Shared\MeUi.Authentication.Core.Shared.Application\MeUi.Authentication.Core.Shared.Application.csproj" />
-    <ProjectReference Include="..\MeUi.Authentication.Core.Shared\MeUi.Authentication.Core.Shared.Infrastructure\MeUi.Authentication.Core.Shared.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

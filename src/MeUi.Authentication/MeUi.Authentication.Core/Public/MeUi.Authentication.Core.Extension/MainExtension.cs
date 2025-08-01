@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using MeUi.Authentication.Core.Application.Interfaces;
 using MeUi.Authentication.Core.Infrastructure.Services;
 using MeUi.Authentication.Core.Shared.Application.Interfaces;
-using MeUi.Authentication.Core.Shared.Infrastructure.Services;
 using MeUi.Authentication.Core.Infrastructure.Data.Repositories;
 using System.Data.Common;
 using MeUi.Authentication.Core.Endpoint.Endpoints;
 using MeUi.Authentication.Core.Application.QueryHandlers;
+using MeUi.Authentication.Core.Infrastructure.Data.Seeders;
 
 namespace MeUi.Authentication.Core.Extension;
 
@@ -34,6 +34,8 @@ public static class MainExtension
 
         services.AddScoped(typeof(IAuthenticationCoreRepository<>), typeof(AuthenticationCoreRepository<>));
         services.AddScoped<ILoginMethodSeeder, LoginMethodSeeder>();
+        services.AddScoped<IUserSeeder, UserSeeder>();
+        services.AddScoped<IUserLoginMethodSeeder, UserLoginMethodSeeder>();
 
         return services;
     }

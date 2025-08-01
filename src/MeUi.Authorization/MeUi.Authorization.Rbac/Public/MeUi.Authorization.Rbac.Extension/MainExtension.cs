@@ -6,6 +6,7 @@ using MeUi.Authorization.Rbac.Application.Interfaces;
 using MeUi.Authorization.Rbac.Infrastructure.Data.Repositories;
 using MeUi.Authorization.Rbac.Endpoint.Endpoints;
 using MeUi.Authorization.Rbac.Application.QueryHandlers;
+using MeUi.Authorization.Rbac.Infrastructure.Data.Seeders;
 
 namespace MeUi.Authorization.Rbac.Extension;
 
@@ -26,6 +27,7 @@ public static class MainExtension
         });
 
         services.AddScoped(typeof(IAuthorizationRbacRepository<>), typeof(AuthorizationRbacRepository<>));
+        services.AddHostedService<SuperAdminSeeder>();
 
         return services;
     }

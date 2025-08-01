@@ -13,7 +13,7 @@ using MeUi.Authentication.Core.Application.Interfaces;
 
 namespace MeUi.Authentication.Password.Application.CommandHandlers;
 
-public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, EmptyResult>
+public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, Guid>
 {
     private readonly IAuthenticationPasswordRepository<Domain.Entities.Password> _passwordRepository;
     private readonly IPasswordHasher _passwordHasher;
@@ -27,7 +27,7 @@ public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, EmptyR
         _passwordHasher = passwordHasher;
     }
 
-    public override async Task<EmptyResult> ExecuteAsync(RegisterCommand command, CancellationToken ct)
+    public override async Task<Guid> ExecuteAsync(RegisterCommand command, CancellationToken ct)
     {
         return await WithTransactionAsync(async (ct) =>
         {
@@ -61,7 +61,7 @@ public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, EmptyR
             };
             _passwordRepository.Add(password, ct);
 
-            return new EmptyResult();
+            return userId;
         }, ct, _passwordRepository);
     }
 }

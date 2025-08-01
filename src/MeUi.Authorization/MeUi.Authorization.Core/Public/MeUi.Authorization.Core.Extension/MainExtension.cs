@@ -7,6 +7,9 @@ using MeUi.Authorization.Core.Infrastructure.Data.Repositories;
 using MeUi.Authorization.Core.Endpoint.Endpoints;
 using MeUi.Authorization.Core.Application.QueryHandlers;
 using MeUi.Authorization.Core.Infrastructure.Data.Seeders;
+using FastEndpoints;
+using MeUi.Authorization.Core.ApplicationContract.Queries;
+using MeUi.Authorization.Core.ApplicationContract.Dtos;
 
 namespace MeUi.Authorization.Core.Extension;
 
@@ -31,6 +34,7 @@ public static class MainExtension
         services.AddScoped<ResourceSeeder>();
         services.AddScoped<ResourceActionSeeder>();
         services.AddHostedService<AuthorizationCoreSeeder>();
+        services.AddScoped<ICommandHandler<GetResourceActionsQuery, IEnumerable<ResourceActionDto>>, GetResourceActionsQueryHandler>();
 
         return services;
     }

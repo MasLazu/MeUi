@@ -1,6 +1,6 @@
 using MeUi.Authentication.Core.Shared.Application.Interfaces;
 
-namespace MeUi.Authentication.Core.Shared.Infrastructure.Services;
+namespace MeUi.Authentication.Core.Infrastructure.Services;
 
 public class PasswordHasher : IPasswordHasher
 {

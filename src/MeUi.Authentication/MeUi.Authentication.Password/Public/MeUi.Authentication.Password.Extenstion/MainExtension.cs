@@ -8,6 +8,7 @@ using MeUi.Authentication.Password.Application.CommandHandlers;
 using MeUi.Authentication.Core.Application.Interfaces;
 using MeUi.Authentication.Core.Infrastructure.Data.Repositories;
 using System.Data.Common;
+using MeUi.Authentication.Password.Shared.Application.Interfaces;
 
 namespace MeUi.Authentication.Password.Extenstion;
 
@@ -29,6 +30,7 @@ public static class MainExtension
 
         services.AddScoped(typeof(IAuthenticationPasswordRepository<>), typeof(AuthenticationPasswordRepository<>));
         services.AddHostedService<PasswordLoginMethodSeeder>();
+        services.AddScoped<IPasswordSeeder, PasswordSeeder>();
 
         return services;
     }

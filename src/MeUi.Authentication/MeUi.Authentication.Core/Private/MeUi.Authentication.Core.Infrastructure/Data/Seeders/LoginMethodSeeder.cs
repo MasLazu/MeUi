@@ -4,7 +4,7 @@ using MeUi.Authentication.Core.Domain.Entities;
 using MeUi.Authentication.Core.ApplicationContract.Dtos;
 using MeUi.Authentication.Core.Application.Spesifications;
 
-namespace MeUi.Authentication.Core.Shared.Infrastructure.Services;
+namespace MeUi.Authentication.Core.Infrastructure.Data.Seeders;
 
 public class LoginMethodSeeder : ILoginMethodSeeder
 {

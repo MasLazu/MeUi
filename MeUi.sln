@@ -53,8 +53,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MeUi.Authentication.Core.Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeUi.Authentication.Core.Shared.Application", "src\MeUi.Authentication\MeUi.Authentication.Core\Public\MeUi.Authentication.Core.Shared\MeUi.Authentication.Core.Shared.Application\MeUi.Authentication.Core.Shared.Application.csproj", "{4213F63F-BF63-4000-964E-F7404BE23FBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeUi.Authentication.Core.Shared.Infrastructure", "src\MeUi.Authentication\MeUi.Authentication.Core\Public\MeUi.Authentication.Core.Shared\MeUi.Authentication.Core.Shared.Infrastructure\MeUi.Authentication.Core.Shared.Infrastructure.csproj", "{954377C1-1995-4D11-BAA5-5A2E738BD8D1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeUi.Shared.Endpoint", "src\MeUi.Shared\MeUi.Shared.Endpoint\MeUi.Shared.Endpoint.csproj", "{A003C8D7-AECB-4D8D-8726-F28451DE7324}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeUi.Entry", "src\MeUi.Entry\MeUi.Entry.csproj", "{F80882FE-F577-4984-92AA-5F1926A87E29}"
@@ -104,6 +102,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeUi.Authorization.Rbac.Endpoint", "src\MeUi.Authorization\MeUi.Authorization.Rbac\Private\MeUi.Authorization.Rbac.Endpoint\MeUi.Authorization.Rbac.Endpoint.csproj", "{F471D9A3-2290-41DE-B2F2-9C20726B8036}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeUi.Authorization.Rbac.Infrastructure", "src\MeUi.Authorization\MeUi.Authorization.Rbac\Private\MeUi.Authorization.Rbac.Infrastructure\MeUi.Authorization.Rbac.Infrastructure.csproj", "{94AD36C5-FD23-426B-8323-1747C716CF97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MeUi.Authentication.Password.Shared", "MeUi.Authentication.Password.Shared", "{B5B1EC48-E3BD-46E4-BBD5-197E217770D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeUi.Authentication.Password.Shared.Application", "src\MeUi.Authentication\MeUi.Authentication.Password\Public\MeUi.Authentication.Password.Shared\MeUi.Authentication.Password.Shared.Application\MeUi.Authentication.Password.Shared.Application.csproj", "{59793246-9CE4-40E5-9E6F-FF82BA619F07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -295,18 +297,6 @@ Global
 		{4213F63F-BF63-4000-964E-F7404BE23FBE}.Release|x64.Build.0 = Release|Any CPU
 		{4213F63F-BF63-4000-964E-F7404BE23FBE}.Release|x86.ActiveCfg = Release|Any CPU
 		{4213F63F-BF63-4000-964E-F7404BE23FBE}.Release|x86.Build.0 = Release|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Debug|x64.Build.0 = Debug|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Debug|x86.Build.0 = Debug|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Release|x64.ActiveCfg = Release|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Release|x64.Build.0 = Release|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Release|x86.ActiveCfg = Release|Any CPU
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1}.Release|x86.Build.0 = Release|Any CPU
 		{A003C8D7-AECB-4D8D-8726-F28451DE7324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A003C8D7-AECB-4D8D-8726-F28451DE7324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A003C8D7-AECB-4D8D-8726-F28451DE7324}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -511,6 +501,18 @@ Global
 		{94AD36C5-FD23-426B-8323-1747C716CF97}.Release|x64.Build.0 = Release|Any CPU
 		{94AD36C5-FD23-426B-8323-1747C716CF97}.Release|x86.ActiveCfg = Release|Any CPU
 		{94AD36C5-FD23-426B-8323-1747C716CF97}.Release|x86.Build.0 = Release|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Debug|x64.Build.0 = Debug|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Debug|x86.Build.0 = Debug|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Release|x64.ActiveCfg = Release|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Release|x64.Build.0 = Release|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Release|x86.ActiveCfg = Release|Any CPU
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -540,7 +542,6 @@ Global
 		{DF0B68AD-B9D5-4370-9937-22166CB07887} = {32BD52DA-3FFB-1C80-5707-6B371D3D1939}
 		{1A4D5231-3938-ABAE-71F9-0CA57646B7CF} = {D89D35FF-B93F-6B08-B13B-45247AE20C75}
 		{4213F63F-BF63-4000-964E-F7404BE23FBE} = {1A4D5231-3938-ABAE-71F9-0CA57646B7CF}
-		{954377C1-1995-4D11-BAA5-5A2E738BD8D1} = {1A4D5231-3938-ABAE-71F9-0CA57646B7CF}
 		{A003C8D7-AECB-4D8D-8726-F28451DE7324} = {87C940CD-47DE-FE2A-2E90-50F93A6EC4F6}
 		{F80882FE-F577-4984-92AA-5F1926A87E29} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{CB4C684D-8071-4B8F-BAF0-6D702489F2E5} = {D89D35FF-B93F-6B08-B13B-45247AE20C75}
@@ -566,5 +567,7 @@ Global
 		{6A8CA9E4-B2A9-4874-B3A0-8178F952DAB4} = {EDA38845-38C7-9562-2C5C-08F0EB4F1136}
 		{F471D9A3-2290-41DE-B2F2-9C20726B8036} = {EDA38845-38C7-9562-2C5C-08F0EB4F1136}
 		{94AD36C5-FD23-426B-8323-1747C716CF97} = {EDA38845-38C7-9562-2C5C-08F0EB4F1136}
+		{B5B1EC48-E3BD-46E4-BBD5-197E217770D1} = {66CD5881-7CF8-2E53-FEE7-2F515531D50A}
+		{59793246-9CE4-40E5-9E6F-FF82BA619F07} = {B5B1EC48-E3BD-46E4-BBD5-197E217770D1}
 	EndGlobalSection
 EndGlobal

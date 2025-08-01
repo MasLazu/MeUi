@@ -2,7 +2,7 @@ using MeUi.Shared.ApplicationContract.Commands;
 
 namespace MeUi.Authentication.Password.ApplicationContract.Commands;
 
-public class RegisterCommand : EmptyResultCommand
+public class RegisterCommand : BaseCommand<Guid>
 {
     public string Name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
