@@ -267,7 +267,7 @@ dotnet ef migrations script --project src/MeUi.Entry
 // Command Handler
 public class CreateUserCommandHandler : BaseCommandHandler<CreateUserCommand, CreateUserResponse>
 {
-    public async Task<CreateUserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<CreateUserResponse> Handle(CreateUserCommand request, CancellationToken ct)
     {
         // Implementation
     }
@@ -276,7 +276,7 @@ public class CreateUserCommandHandler : BaseCommandHandler<CreateUserCommand, Cr
 // Query Handler
 public class GetUsersQueryHandler : BaseQueryHandler<GetUsersQuery, GetUsersResponse>
 {
-    public async Task<GetUsersResponse> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+    public async Task<GetUsersResponse> Handle(GetUsersQuery request, CancellationToken ct)
     {
         // Implementation
     }

@@ -15,35 +15,35 @@ public class Repository<T> : RepositoryBase<T>, IRepository<T> where T : BaseEnt
         _dbContext = dbContext;
     }
 
-    public T Add(T entity, CancellationToken cancellationToken = default)
+    public T Add(T entity, CancellationToken ct = default)
     {
         _dbContext.Set<T>().Add(entity);
         return entity;
     }
 
-    public IEnumerable<T> AddRange(IEnumerable<T> entities, CancellationToken cancellationToken = default)
+    public IEnumerable<T> AddRange(IEnumerable<T> entities, CancellationToken ct = default)
     {
         _dbContext.Set<T>().AddRange(entities);
         return entities;
     }
 
-    public void Update(T entity, CancellationToken cancellationToken = default)
+    public void Update(T entity, CancellationToken ct = default)
     {
         _dbContext.Set<T>().Update(entity);
     }
 
-    public void UpdateRange(IEnumerable<T> entities, CancellationToken cancellationToken = default)
+    public void UpdateRange(IEnumerable<T> entities, CancellationToken ct = default)
     {
         _dbContext.Set<T>().UpdateRange(entities);
     }
 
-    public void Delete(T entity, CancellationToken cancellationToken = default)
+    public void Delete(T entity, CancellationToken ct = default)
     {
         entity.DeletedAt = DateTimeOffset.UtcNow;
         _dbContext.Set<T>().Update(entity);
     }
 
-    public void DeleteRange(IEnumerable<T> entities, CancellationToken cancellationToken = default)
+    public void DeleteRange(IEnumerable<T> entities, CancellationToken ct = default)
     {
         foreach (T entity in entities)
         {

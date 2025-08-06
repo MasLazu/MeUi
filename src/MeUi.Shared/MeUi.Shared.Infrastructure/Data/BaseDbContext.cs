@@ -11,7 +11,7 @@ public abstract class BaseDbContext<T> : DbContext where T : DbContext
     {
     }
 
-    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
     {
         foreach (EntityEntry<BaseEntity> entry in ChangeTracker.Entries<BaseEntity>())
         {
@@ -31,7 +31,7 @@ public abstract class BaseDbContext<T> : DbContext where T : DbContext
                     break;
             }
         }
-        return await base.SaveChangesAsync(cancellationToken);
+        return await base.SaveChangesAsync(ct);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
