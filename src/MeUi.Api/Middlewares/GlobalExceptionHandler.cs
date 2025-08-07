@@ -32,12 +32,10 @@ public class GlobalExceptionHandler : IExceptionHandler
                     .ToDictionary(
                         g => g.Key,
                         g => g.Select(e => e.ErrorMessage).ToArray())),
-
             Application.Exceptions.ApplicationException ex => new ErrorResponse(
                 message: ex.Message,
                 errorCode: ex.ErrorCode,
                 errors: ex.Errors),
-
             _ => new ErrorResponse(message: "An unexpected error occurred")
         };
 

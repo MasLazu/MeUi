@@ -1,4 +1,3 @@
-using MeUi.Api.Endpoints;
 using MeUi.Application.Features.Authorization.Queries.GetPages;
 using MeUi.Application.Features.Authorization.Models;
 
@@ -8,8 +7,8 @@ public class GetPagesEndpoint : BaseEndpointWithoutRequest<IEnumerable<PageDto>>
 {
     public override void ConfigureEndpoint()
     {
-        Get("/pages");
-        Description(x => x.WithTags("Authorization").WithSummary("Get all pages"));
+        Get("api/v1/pages");
+        Description(x => x.WithTags("Page").WithSummary("Get all pages"));
     }
 
     public override async Task HandleAsync(CancellationToken ct)

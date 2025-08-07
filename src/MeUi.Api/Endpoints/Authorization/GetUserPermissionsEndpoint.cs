@@ -8,8 +8,8 @@ public class GetUserPermissionsEndpoint : BaseEndpoint<GetUserPermissionsQuery, 
 {
     public override void ConfigureEndpoint()
     {
-        Get("/users/{userId}/permissions");
-        Description(x => x.WithTags("Authorization").WithSummary("Get user permissions"));
+        Get("api/v1/users/{userId}/permissions");
+        Description(x => x.WithTags("UserPermission").WithSummary("Get user permissions"));
     }
 
     public override async Task HandleAsync(GetUserPermissionsQuery req, CancellationToken ct)

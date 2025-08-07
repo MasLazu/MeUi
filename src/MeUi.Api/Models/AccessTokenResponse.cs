@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace MeUi.Api.Models;
 
 public class AccessTokenResponseData

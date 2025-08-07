@@ -13,8 +13,8 @@ public class GetAccessiblePagesEndpoint : BaseEndpoint<GetAccessiblePagesQuery, 
 {
     public override void ConfigureEndpoint()
     {
-        Get("/users/{userId}/accessible-pages");
-        Description(x => x.WithTags("Authorization").WithSummary("Get accessible pages for user"));
+        Get("api/v1/users/{userId}/accessible-pages");
+        Description(x => x.WithTags("User").WithSummary("Get accessible pages for user"));
     }
 
     public override async Task HandleAsync(GetAccessiblePagesQuery req, CancellationToken ct)

@@ -1,4 +1,3 @@
-using MeUi.Api.Endpoints;
 using MeUi.Api.Models;
 using MeUi.Application.Exceptions;
 using MeUi.Application.Features.Authentication.Commands.RefreshToken;
@@ -10,9 +9,9 @@ public class RefreshTokenEndpoint : BaseEndpointWithoutRequest<AccessTokenRespon
 {
     public override void ConfigureEndpoint()
     {
-        Post("/auth/refresh");
+        Post("api/v1/auth/refresh");
         AllowAnonymous();
-        Description(x => x.WithTags("Authentication").WithSummary("Refresh access token"));
+        Description(x => x.WithTags("Auth").WithSummary("Refresh access token"));
     }
 
     public override async Task HandleAsync(CancellationToken ct)

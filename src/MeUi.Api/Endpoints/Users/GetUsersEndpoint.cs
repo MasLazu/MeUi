@@ -1,41 +1,22 @@
 using MeUi.Api.Endpoints;
 using MeUi.Application.Features.Users.Queries.GetUsersPaginated;
-using MeUi.Application.Common.Models;
 using MeUi.Application.Features.Users.Models;
+using MeUi.Application.Models;
 
 namespace MeUi.Api.Endpoints.Users;
 
-public class GetUsersRequest
-{
-    public int PageNumber { get; set; } = 1;
-    public int PageSize { get; set; } = 10;
-    public string? SearchTerm { get; set; }
-    public bool? IsSuspended { get; set; }
-}
 
-public class GetUsersEndpoint : BaseEndpoint<GetUsersRequest, PaginatedResult<UserDto>>
+public class GetUsersEndpoint : BaseEndpoint<GetUsersPaginatedQuery, PaginatedResult<UserDto>>
 {
-    protected override void ConfigureEndpoint()
+    public override void ConfigureEndpoint()
     {
-        Get("/users");
-        AllowAnonymous(); // TODO: Configure proper authorization
-        Description(x => x
-            .WithTags("Users")
-            .WithSummary("Get paginated list of users")
-            .WithDescription("Retrieves a paginated list of users with optional filtering"));
+        Get("api/v1/users");
+        Description(x => x.WithTags("User").WithSummary("Get paginated list of users"));
     }
 
-    public override async Task HandleAsync(GetUsersRequest req, CancellationToken ct)
+    public override async Task HandleAsync(GetUsersPaginatedQuery req, CancellationToken ct)
     {
-        var query = new GetUsersPaginatedQuery
-        {
-            PageNumber = req.PageNumber,
-            PageSize = req.PageSize,
-            SearchTerm = req.SearchTerm,
-            IsSuspended = req.IsSuspended
-        };
-
-        Application.Models.PaginatedResult<UserDto> result = await Mediator.Send(query, ct);
-        await SendSuccessAsync(result, ct);
+        PaginatedResult<UserDto> result = await Mediator.Send(req, ct);
+        await SendSuccessAsync(result, "Users retrieved successfully", ct);
     }
 }

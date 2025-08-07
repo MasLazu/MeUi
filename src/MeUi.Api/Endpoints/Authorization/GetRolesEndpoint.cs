@@ -9,8 +9,8 @@ public class GetRolesEndpoint : BaseEndpoint<GetRolesPaginatedQuery, PaginatedRe
 {
     public override void ConfigureEndpoint()
     {
-        Get("/roles");
-        Description(x => x.WithTags("Authorization").WithSummary("Get paginated list of roles"));
+        Get("api/v1/roles");
+        Description(x => x.WithTags("Role").WithSummary("Get paginated list of roles"));
     }
 
     public override async Task HandleAsync(GetRolesPaginatedQuery req, CancellationToken ct)

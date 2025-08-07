@@ -1,4 +1,3 @@
-using MeUi.Api.Endpoints;
 using MeUi.Application.Features.Authorization.Queries.GetPermissions;
 using MeUi.Application.Features.Authorization.Models;
 
@@ -8,8 +7,8 @@ public class GetPermissionsEndpoint : BaseEndpointWithoutRequest<IEnumerable<Per
 {
     public override void ConfigureEndpoint()
     {
-        Get("/permissions");
-        Description(x => x.WithTags("Authorization").WithSummary("Get all permissions"));
+        Get("api/v1/permissions");
+        Description(x => x.WithTags("Permission").WithSummary("Get all permissions"));
     }
 
     public override async Task HandleAsync(CancellationToken ct)

@@ -8,8 +8,8 @@ public class CreateUserEndpoint : BaseEndpoint<CreateUserCommand, Guid>
 {
     public override void ConfigureEndpoint()
     {
-        Post("/users");
-        Description(x => x.WithTags("Users").WithSummary("Create a new user"));
+        Post("api/v1/users");
+        Description(x => x.WithTags("User").WithSummary("Create a new user"));
     }
 
     public override async Task HandleAsync(CreateUserCommand req, CancellationToken ct)

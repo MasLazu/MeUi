@@ -1,39 +1,64 @@
 using FastEndpoints;
-using FastEndpoints.Swagger;
 using FastEndpoints.Security;
-using MeUi.Api.Endpoints;
-using MeUi.Api.Extensions;
+using FastEndpoints.Swagger;
+using MeUi.Api.Middlewares;
 using MeUi.Application;
 using MeUi.Infrastructure;
+using MeUi.Infrastructure.Data.Seeders;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 try
 {
-    // Configure Serilog early for startup logging
     Log.Logger = new LoggerConfiguration()
         .ReadFrom.Configuration(builder.Configuration)
         .CreateLogger();
 
     builder.Host.UseSerilog();
 
-    Log.Information("Starting MeUi API application");
-
-    // Add services to the container using extension methods
     builder.Services
-        .AddApplication()                                    // MediatR, behaviors, validation, mapping
-        .AddInfrastructure(builder.Configuration)           // Database, repositories, external services
-        .AddApiServices(builder.Configuration)              // FastEndpoints, Swagger, CORS, Auth
-        .AddGlobalExceptionHandling();                      // Global exception handling
+        .AddApplication()
+        .AddInfrastructure(builder.Configuration)
+        .AddFastEndpoints()
+        .AddAuthenticationJwtBearer(s =>
+        {
+            s.SigningKey = builder.Configuration["Jwt:Key"] ?? "The secret used to sign tokens";
+        })
+        .AddAuthorization()
+        .SwaggerDocument();
+
+    builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+    builder.Services.AddProblemDetails();
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(policy =>
+        {
+            var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+            policy.WithOrigins(allowedOrigins)
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials();
+        });
+    });
+
+    Log.Information("Starting MeUi API application");
 
     WebApplication app = builder.Build();
 
-    // Configure the HTTP request pipeline
-    app.ConfigurePipeline();
+    app.UseExceptionHandler()
+       .UseCors()
+       .UseAuthentication()
+       .UseAuthorization()
+       .UseFastEndpoints()
+       .UseSwaggerGen();
 
-    // Initialize database (apply migrations and seed data)
-    await app.InitializeDatabaseAsync();
+    {
+        using var scope = app.Services.CreateScope();
+        var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+        await seeder.SeedAsync();
+    }
 
     Log.Information("MeUi API application configured successfully");
 

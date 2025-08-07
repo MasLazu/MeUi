@@ -1,33 +1,18 @@
-using MeUi.Api.Endpoints;
 using MeUi.Application.Features.Users.Commands.UpdateUser;
-using MeUi.Application.Features.Users.Models;
 
 namespace MeUi.Api.Endpoints.Users;
 
-public class UpdateUserEndpoint : BaseEndpoint<UpdateUserRequest, Guid>
+public class UpdateUserEndpoint : BaseEndpoint<UpdateUserCommand, Guid>
 {
-    protected override void ConfigureEndpoint()
+    public override void ConfigureEndpoint()
     {
-        Put("/users/{id}");
-        AllowAnonymous(); // TODO: Configure proper authorization
-        Description(x => x
-            .WithTags("Users")
-            .WithSummary("Update an existing user")
-            .WithDescription("Updates an existing user in the system"));
+        Put("api/v1/users/{id}");
+        Description(x => x.WithTags("User").WithSummary("Update an existing user"));
     }
 
-    public override async Task HandleAsync(UpdateUserRequest req, CancellationToken ct)
+    public override async Task HandleAsync(UpdateUserCommand req, CancellationToken ct)
     {
-        var command = new UpdateUserCommand
-        {
-            Id = req.Id,
-            Username = req.Username,
-            Email = req.Email,
-            Name = req.Name,
-            IsSuspended = req.IsSuspended
-        };
-
-        Guid userId = await Mediator.Send(command, ct);
-        await SendSuccessAsync(userId, ct);
+        Guid userId = await Mediator.Send(req, ct);
+        await SendSuccessAsync(userId, "User updated successfully", ct);
     }
 }
