@@ -16,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MeUi.Application\MeUi.Application.csproj" />
     <ProjectReference Include="..\MeUi.Infrastructure\MeUi.Infrastructure.csproj" />
-    <ProjectReference Include="..\MeUi.Contracts\MeUi.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
